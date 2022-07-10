@@ -3,6 +3,7 @@
 
 #include "abstract_list.hpp"
 #include "Node.hpp"
+#include <stdexcept>
 
 template <typename T>
 class LinkedList: public AbstractList<T>
@@ -28,23 +29,24 @@ public:
   std::size_t getLength() const noexcept;
 
   // insert item at position in the list
-  void insert(std::size_t position, const T& item);
+  void insert(std::size_t position, const T& item) throw();
 
   // remove item at position in the list
-  void remove(std::size_t position);
+  void remove(std::size_t position) throw();
 
   // remove all items from the list
   void clear();
 
   // get a copy of the item at position
-  T getEntry(std::size_t position) const;
+  T getEntry(std::size_t position) const throw();
 
   // set the value of the item at position
-  void setEntry(std::size_t position, const T& newValue);
+  void setEntry(std::size_t position, const T& newValue) throw();
 
 private:
 
-  //TODO
+  Node<T>* head;
+  size_t size;
   
 };
 

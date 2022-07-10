@@ -4,6 +4,7 @@
 
 #include "abstract_sorted_list.hpp"
 #include "linked_list.hpp"
+#include <stdexcept>
 
 template <typename T>
 class SortedLinkedList: public AbstractSortedList<T>, private LinkedList<T>
@@ -35,16 +36,16 @@ public:
   void insert(const T& item);
 
   // remove first occurrence of item from the list
-  void remove(const T& item);
+  void remove(const T& item) throw();
 
   // remove item at position in the list 
-  void removeAt(std::size_t position);
+  void removeAt(std::size_t position) throw();
 
   // remove all items from the list
   void clear();
 
   // get a copy of the item at position 
-  T getEntry(std::size_t position) const;
+  T getEntry(std::size_t position) const throw();
 
   // get the position of the first occurrence of item
   // return -1 if not in list
@@ -52,7 +53,7 @@ public:
 
 private:
 
-  // TODO
+  LinkedList<T> list;
 
 };
 
