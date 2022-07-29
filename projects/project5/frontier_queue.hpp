@@ -3,6 +3,8 @@
 
 #include "state.hpp"
 #include <vector>
+#include <stdexcept>
+#include <iostream>
 
 template <typename T>
 class frontier_queue {
@@ -21,7 +23,7 @@ public:
   /* pop the state from the frontier with the smallest f-cost
    * This should be a O(log n) operation
    */
-  State<T> pop();
+  State<T> pop() throw();
 
   /* Returns true if the value T p is in the frontier
    * This may be at most an O(n) operation
@@ -34,9 +36,31 @@ public:
    */
   void replaceif(const T &p, std::size_t cost);
 
+
+  //prints contents of heap to std::cout
+  void print();
+
 private:
 
   std::vector<State<T>> queue;
+
+  //private functions to make getting current nodes' parent, left and right childs index easier
+  int parent(int i){
+    return (i-1)/2;
+  }
+
+  int left(int i){
+    return 2*i + 1;
+  }
+
+  int right(int i){
+    return 2*i + 2;
+  }
+
+  //private function when parent at index i and children violate heap property
+  void heapdown(int index);
+
+
   
 };
 
