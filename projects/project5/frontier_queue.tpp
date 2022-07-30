@@ -49,8 +49,16 @@ bool frontier_queue<T>::contains(const T &p) {
 
 template <typename T>
 void frontier_queue<T>::replaceif(const T &p, std::size_t cost) {
-
-  //TODO
+  //int index=0;
+  for(int i=0;i<queue.size();i++){
+    if(queue[i].getValue() == p && queue[i].getPathCost() > cost){
+      //index=i;
+      queue[i].updatePathCost(cost);
+      heapdown(i);
+      break;
+    }
+  }
+  //heapdown(index);
 
 }
 
